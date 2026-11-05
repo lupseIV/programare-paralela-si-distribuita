@@ -4,8 +4,6 @@
 #include <cstdint>
 #include <vector>
 
-// Dense row-major matrix of 64-bit integers stored in one contiguous buffer, so that element
-// (i, j) lives at data[i * cols + j]. The layout matters for the cache effects measured in this lab.
 class Matrix {
 public:
     Matrix(std::size_t rows, std::size_t cols) : rows_(rows), cols_(cols), data_(rows * cols, 0) {}

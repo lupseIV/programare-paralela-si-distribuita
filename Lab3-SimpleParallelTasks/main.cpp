@@ -33,7 +33,6 @@ std::string_view name(Strategy s) {
 bool gDebug = false;
 std::mutex gPrintMutex;
 
-// Computes a single element of the result: result(row, col) = sum_k a(row, k) * b(k, col).
 std::int64_t computeElement(const Matrix& a, const Matrix& b, std::size_t row, std::size_t col,
                             unsigned threadId) {
     if (gDebug) {
@@ -47,10 +46,6 @@ std::int64_t computeElement(const Matrix& a, const Matrix& b, std::size_t row, s
     return sum;
 }
 
-// Calls fn(row, col) for every element of a rows x cols result that thread `threadId` owns.
-// Elements are numbered 0 .. rows*cols-1; for Rows the numbering is row-major, for Columns it is
-// column-major. The consecutive strategies give each thread total/k elements, the last thread also
-// takes the remainder (9x9 with 4 threads -> 20, 20, 20, 21). KthElement takes idx = t, t+k, ...
 template <typename Fn>
 void forEachAssigned(Strategy strategy, unsigned threadId, unsigned nrThreads, std::size_t rows,
                      std::size_t cols, Fn&& fn) {
@@ -70,7 +65,6 @@ void forEachAssigned(Strategy strategy, unsigned threadId, unsigned nrThreads, s
     }
 }
 
-// Thread function: computes, one by one, all elements assigned to `threadId`.
 void worker(const Matrix& a, const Matrix& b, Matrix& result, Strategy strategy, unsigned threadId,
             unsigned nrThreads) {
     forEachAssigned(strategy, threadId, nrThreads, result.rows(), result.cols(),
@@ -108,8 +102,6 @@ Matrix randomMatrix(std::size_t rows, std::size_t cols, std::mt19937_64& rng) {
     return m;
 }
 
-// Prints, for every strategy, which thread computed which element, plus a map of the result matrix
-// showing the owning thread of each cell.
 int runDebug(std::size_t n, unsigned nrThreads) {
     std::mt19937_64 rng(42);
     const Matrix a = randomMatrix(n, n, rng);
@@ -147,7 +139,7 @@ int runDebug(std::size_t n, unsigned nrThreads) {
 }
 
 int runBenchmark(unsigned runs) {
-    const std::vector<std::size_t> sizes = {100, 500, 1000, 2500, 5000, 10000};
+    const std::vector<std::size_t> sizes = {10, 50, 100, 250, 500, 1000};
     const std::vector<unsigned> threadCounts = {1, 2, 4, 8, 16, 32, 64, 256};
 
     std::cout << "Hardware threads: " << std::thread::hardware_concurrency()
