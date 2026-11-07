@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "0 - All three versions": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "all"
+    },
+    "1 - Callbacks (event-driven)": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "callbacks"
+    },
+    "2 - Tasks + ContinueWith (bonus)": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "continuewith"
+    },
+    "3 - Tasks + async/await": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "async"
+    }
+  }
+}

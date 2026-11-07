@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AsyncAwaitServer": {
+      "commandName": "Project",
+      "commandLineArgs": "5000"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CallbackServer": {
+      "commandName": "Project",
+      "commandLineArgs": "5000"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TaskServer": {
+      "commandName": "Project",
+      "commandLineArgs": "5000"
+    }
+  }
+}
